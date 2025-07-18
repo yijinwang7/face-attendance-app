@@ -23,18 +23,12 @@ jobs:
           cd frontend
           npm ci
 
-      - name: Lint frontend
-        run: |
-          cd frontend
-          npm run lint
-
       - name: Install dependencies (backend)
         run: |
           cd backend
           npm ci
 
-      - name: Lint backend
-        run: |
-          cd backend
-          npm run lint   # add a lint script in package.json if you don’t have one
+      - name: Lint
+        run: npm run lint
 
+      
