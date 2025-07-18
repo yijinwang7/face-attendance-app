@@ -7,8 +7,9 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-lint:
+  lint-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -17,15 +18,52 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install all dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      # (optional) then test or build the front end…
-      - name: Build Frontend
+      - name: Install dependencies (frontend)
         run: |
           cd frontend
           npm ci
-          npm run build
+      - name: Lint frontend
+        run: |
+          cd frontend
+          npm run lint
+      - name: Install dependencies (backend)
+        run: |
+          cd backend
+          npm ci
+      - name: Lint backend
+        run: |
+          cd backend
+          npm run lint   # add a lint script in package.json if you don’t have one
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies (frontend)
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Install dependencies (backend)
+        run: |
+          cd backend
+          npm ci
+
+      - name: Lint
+        run: npm run lint
+      
