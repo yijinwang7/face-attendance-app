@@ -28,6 +28,8 @@ jobs:
           cd backend
           npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Lint backend
+        working-directory: backend
+        run: npm ci && npm run lint
+
       
