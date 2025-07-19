@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: '',       // <-- put your MySQL password here if you have one
+  password: '123',       // <-- put your MySQL password here if you have one
   database: 'attendance_db'
 });
 
